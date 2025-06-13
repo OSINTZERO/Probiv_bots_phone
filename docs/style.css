@@ -1,0 +1,464 @@
+/* Импорт современного шрифта */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CSS переменные для удобства поддержки */
+:root {
+    --primary-bg: #0a0a0a;
+    --secondary-bg: #1a1a1a;
+    --card-bg: #252525;
+    --header-bg: #1c1c1c;
+    --accent-color: #00d4ff;
+    --accent-hover: #00b8e6;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --border-color: #404040;
+    --shadow-color: rgba(0, 212, 255, 0.1);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Сброс стилей и базовые настройки */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+    color: var(--text-primary);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Плавная прокрутка */
+html {
+    scroll-behavior: smooth;
+}
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Улучшенный хедер */
+header {
+    background: rgba(28, 28, 28, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 1rem 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+header.scrolled {
+    background: rgba(28, 28, 28, 0.98);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--accent-color), #00ff88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Улучшенная кнопка бургер-меню */
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 8px;
+    display: block;
+    position: relative;
+    width: 32px;
+    height: 28px;
+    border-radius: 6px;
+    transition: var(--transition);
+}
+
+.menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-icon, 
+.menu-icon::before, 
+.menu-icon::after {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-color), #00ff88);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.menu-icon {
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.menu-icon::before {
+    content: '';
+    top: -8px;
+}
+
+.menu-icon::after {
+    content: '';
+    top: 8px;
+}
+
+.menu-toggle.active .menu-icon {
+    background-color: transparent;
+}
+
+.menu-toggle.active .menu-icon::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.menu-toggle.active .menu-icon::after {
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+/* Улучшенное навигационное меню */
+.nav-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    background: rgba(28, 28, 28, 0.98);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 0 0 12px 12px;
+    padding: 15px 0;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.nav-menu a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border-radius: 8px;
+    margin: 0 15px;
+}
+
+.nav-menu a:hover {
+    color: var(--accent-color);
+    background: rgba(0, 212, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.nav-menu.active {
+    display: flex;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Основной контент */
+main {
+    padding: 80px 0 40px;
+}
+
+/* Улучшенные секции */
+section {
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, var(--card-bg) 0%, rgba(37, 37, 37, 0.8) 100%);
+    padding: 30px;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), #00ff88);
+    opacity: 0;
+    transition: var(--transition);
+}
+
+section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 48px var(--shadow-color);
+    border-color: var(--accent-color);
+}
+
+section:hover::before {
+    opacity: 1;
+}
+
+section h2 {
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    font-weight: 600;
+    position: relative;
+}
+
+section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), #00ff88);
+}
+
+section ul,
+section ol {
+    padding-left: 25px;
+}
+
+section li {
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+    position: relative;
+}
+
+section ul li::marker {
+    color: var(--accent-color);
+}
+
+section a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+section a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: var(--transition);
+}
+
+section a:hover {
+    color: var(--accent-hover);
+}
+
+section a:hover::after {
+    width: 100%;
+}
+
+/* Улучшенный футер */
+footer {
+    background: linear-gradient(135deg, var(--header-bg) 0%, #0a0a0a 100%);
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 40px 0;
+    margin-top: 60px;
+    border-top: 1px solid var(--border-color);
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-color), #00ff88);
+}
+
+/* Улучшенный фоновый блок */
+.bg-image {
+    margin-top: 120px;
+    height: 450px;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('image.png') no-repeat center center;
+    background-size: cover;
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.bg-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 255, 136, 0.1));
+    pointer-events: none;
+}
+
+/* Адаптивность для планшетов и десктопов */
+@media (min-width: 768px) {
+    .menu-toggle {
+        display: none;
+    }
+    
+    .nav-menu {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        background: none;
+        backdrop-filter: none;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        text-align: left;
+        box-shadow: none;
+    }
+    
+    .nav-menu a {
+        display: inline-block;
+        padding: 8px 16px;
+        margin: 0 0 0 20px;
+        border-radius: 8px;
+    }
+    
+    .nav-menu a:hover {
+        transform: none;
+    }
+    
+    header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .container {
+        width: 85%;
+        padding: 0 30px;
+    }
+    
+    section {
+        padding: 40px;
+    }
+    
+    section h2 {
+        font-size: 2rem;
+    }
+    
+    .bg-image {
+        margin-top: 100px;
+        height: 500px;
+    }
+}
+
+/* Адаптивность для больших экранов */
+@media (min-width: 1200px) {
+    .container {
+        width: 80%;
+    }
+    
+    section {
+        padding: 50px;
+    }
+    
+    header h1 {
+        font-size: 2.5rem;
+    }
+}
+
+/* Улучшенные анимации */
+@media (prefers-reduced-motion: no-preference) {
+    section {
+        animation: fadeInUp 0.6s ease-out;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Темы для системных предпочтений */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --primary-bg: #0a0a0a;
+        --secondary-bg: #1a1a1a;
+    }
+}
+
+/* Улучшенная типографика */
+p {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+/* Стили для кода */
+code {
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--accent-color);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-family: 'Fira Code', monospace;
+}
+
+/* Стили для выделения */
+::selection {
+    background: var(--accent-color);
+    color: var(--primary-bg);
+}
+
+/* Стили для фокуса */
+*:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
